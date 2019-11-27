@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.cognizant.truyum.model.Cart;
 import com.cognizant.truyum.model.MenuItem;
@@ -55,7 +56,7 @@ public class CartDaoCollectionImpl implements CartDao{
               userCarts.put(userId, cart);
 
         } else {
-              menuItemList = new ArrayList<MenuItem>();
+              menuItemList = new CopyOnWriteArrayList<MenuItem>();
               menuItemList.add(menuItem);
 
               Cart cart = new Cart(menuItemList, menuItem.getPrice());
@@ -65,9 +66,14 @@ public class CartDaoCollectionImpl implements CartDao{
 
 
 	}
+	@Override
 	public List<MenuItem> getAllCartItems(long userid) throws CartEmptyException
 	{
 		Cart cart = userCarts.get(new Long(userid));
+		if(cart==null)
+		{
+			 throw new CartEmptyException("Cart is empty");
+		}
         List<MenuItem> menuItemList = cart.getMenuItemList();
         if (menuItemList == null || menuItemList.size() == 0) {
               throw new CartEmptyException("Cart is empty");

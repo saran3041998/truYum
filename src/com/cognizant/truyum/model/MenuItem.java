@@ -194,6 +194,22 @@ public class MenuItem {
 		this.category = category;
 		this.freedelivery = freedelivery;
 	}
+	/**
+	 * 
+	 */
+	
+	 
+	 
+	public MenuItem() {
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @param dateOfLaunch1
+	 */
+	public void setDateOfLaunch1(Date dateOfLaunch1) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
